@@ -1,0 +1,446 @@
+{
+  "id": "palace",
+  "name": "天宫宝库",
+  "en": "CELESTIAL VAULT",
+  "subtitle": "天宫藏宝，星汉为锁",
+  "cost_item": "天工石",
+  "cost_price": 100,
+  "pity_limit": 200,
+  "repeat_refund": 30,
+  "max_pulls": 10,
+  "description": "消耗天工石开启宝库（1 颗 / 次，十连 10 颗）。奖池固定 12 格：普通 85.00%、精品 14.70%、稀有 0.30%（精品武将 0.15% + 史诗皮肤 0.15%）。每抽 +1 幸运值，幸运值越高抽中大奖的概率越高，满 200 点必中；中大奖后幸运值清零，抽到已拥有的精品武将 / 史诗皮肤返还 30 颗天工石。",
+  "rules": [
+    "天工石 100 元宝 / 颗，跨期通用不过期。",
+    "普通 85.00%：菜篮子×2 / 银币×188 / 手气卡×2 / 换将卡×2 / 欢乐豆×88，可重复获得。",
+    "精品 14.70%：进阶丹×1 / 雁翎甲×1 / 将魂×88 / 雁翎×888 / 招募令×1，可重复获得。",
+    "稀有 0.30%：精品武将 0.15% + 史诗皮肤 0.15%，两类大奖各自 3 选 1，为本期限定。",
+    "每抽 +1 幸运值；幸运值越高大奖概率越高，满 200 点必中，中大奖后幸运值清零。",
+    "抽到已拥有的精品武将 / 史诗皮肤，返还 30 颗天工石。",
+    "单抽与十连的概率与随机方式完全相同，只是次数不同。"
+  ],
+  "grid": [
+    {
+      "slot": 1,
+      "key": "basket",
+      "name": "菜篮子",
+      "kind": "item",
+      "rarity": "common",
+      "tier": "white",
+      "group": "普通",
+      "qty": 2,
+      "weight": 2550
+    },
+    {
+      "slot": 2,
+      "key": "silver",
+      "name": "银币",
+      "kind": "item",
+      "rarity": "common",
+      "tier": "white",
+      "group": "普通",
+      "qty": 188,
+      "weight": 1900
+    },
+    {
+      "slot": 3,
+      "key": "luck_card_2",
+      "name": "手气卡",
+      "kind": "item",
+      "rarity": "common",
+      "tier": "white",
+      "group": "普通",
+      "qty": 2,
+      "weight": 1550
+    },
+    {
+      "slot": 4,
+      "key": "swap_card_2",
+      "name": "换将卡",
+      "kind": "item",
+      "rarity": "common",
+      "tier": "white",
+      "group": "普通",
+      "qty": 2,
+      "weight": 1500
+    },
+    {
+      "slot": 5,
+      "key": "bean",
+      "name": "欢乐豆",
+      "kind": "item",
+      "rarity": "common",
+      "tier": "white",
+      "group": "普通",
+      "qty": 88,
+      "weight": 1000
+    },
+    {
+      "slot": 6,
+      "key": "pill_1",
+      "name": "进阶丹",
+      "kind": "item",
+      "rarity": "common",
+      "tier": "yellow",
+      "group": "精品",
+      "qty": 1,
+      "weight": 500
+    },
+    {
+      "slot": 7,
+      "key": "armor_1",
+      "name": "雁翎甲",
+      "kind": "item",
+      "rarity": "rare",
+      "tier": "yellow",
+      "group": "精品",
+      "qty": 1,
+      "weight": 400
+    },
+    {
+      "slot": 8,
+      "key": "soul_1000",
+      "name": "将魂",
+      "kind": "item",
+      "rarity": "epic",
+      "tier": "green",
+      "group": "精品",
+      "qty": 88,
+      "weight": 220
+    },
+    {
+      "slot": 9,
+      "key": "feather",
+      "name": "雁翎",
+      "kind": "item",
+      "rarity": "epic",
+      "tier": "blue",
+      "group": "精品",
+      "qty": 888,
+      "weight": 150
+    },
+    {
+      "slot": 10,
+      "key": "token_1",
+      "name": "招募令",
+      "kind": "item",
+      "rarity": "rare",
+      "tier": "yellow",
+      "group": "精品",
+      "qty": 1,
+      "weight": 200
+    },
+    {
+      "slot": 11,
+      "key": "grand:hero",
+      "name": "精品武将",
+      "kind": "hero",
+      "rarity": "legendary",
+      "tier": "red",
+      "group": "稀有",
+      "qty": 1,
+      "weight": 15,
+      "grand": "hero"
+    },
+    {
+      "slot": 12,
+      "key": "grand:skin",
+      "name": "史诗皮肤",
+      "kind": "skin",
+      "rarity": "legendary",
+      "tier": "red",
+      "group": "稀有",
+      "qty": 1,
+      "weight": 15,
+      "grand": "skin"
+    }
+  ],
+  "periods": [
+    {
+      "id": "palace-01",
+      "label": "第1期",
+      "dates": "2024-11-08 ~ 11-22",
+      "grand_prizes": {
+        "hero": [
+          "谋法正",
+          "严纲",
+          "梁兴"
+        ],
+        "skin": [
+          "渐知秋波·秦宓",
+          "鸟语花香·孙尚香",
+          "草木萌动·孙寒华"
+        ]
+      },
+      "featured": "谋法正",
+      "current": false
+    },
+    {
+      "id": "palace-02",
+      "label": "2025 新春期",
+      "dates": "2025-01-28 ~ 03-21",
+      "grand_prizes": {
+        "hero": [
+          "谋张辽",
+          "谋荀彧",
+          "曹嵩"
+        ],
+        "skin": [
+          "恤民乐谏·阎象",
+          "决战曹军·审配",
+          "撞阵冲军·李严"
+        ]
+      },
+      "featured": "谋张辽",
+      "current": false
+    },
+    {
+      "id": "palace-05",
+      "label": "2025 暑期",
+      "dates": "2025-08-02 ~ 10-05",
+      "grand_prizes": {
+        "hero": [
+          "势黄祖",
+          "谋黄月英",
+          "来敏"
+        ],
+        "skin": [
+          "心御万念·孙寒华",
+          "嗜血熊罴·夏侯渊",
+          "步步生花·关银屏"
+        ]
+      },
+      "featured": "势黄祖",
+      "current": false
+    },
+    {
+      "id": "palace-06",
+      "label": "2025 嘉年华",
+      "dates": "2025-11-08 ~ 2026-01-18",
+      "grand_prizes": {
+        "hero": [
+          "孟达",
+          "友徐庶",
+          "李遗"
+        ],
+        "skin": [
+          "挥定南中·李遗",
+          "火烧连营·陆逊",
+          "与蝶共舞·蔡贞姬"
+        ]
+      },
+      "featured": "孟达",
+      "current": false
+    },
+    {
+      "id": "palace-04b",
+      "label": "2025 势鲁肃",
+      "dates": "2025-12-06 ~ 2026-02-15",
+      "featured": "势·鲁肃",
+      "grand_prizes": {
+        "hero": [
+          "势·鲁肃",
+          "势·杨弘",
+          "王经"
+        ],
+        "skin": [
+          "截驾弑龙·贾充",
+          "胜券在握·鲁肃",
+          "龙生九子·钟会"
+        ]
+      },
+      "current": false
+    },
+    {
+      "id": "palace-04c",
+      "label": "2025 冬至",
+      "dates": "2025-12-20 ~ 2026-01-18",
+      "featured": "鲍信",
+      "grand_prizes": {
+        "hero": [
+          "鲍信",
+          "曹嵩",
+          "谋法正"
+        ],
+        "skin": [
+          "奇兵退敌·陈登",
+          "超尘逐电·夏侯霸",
+          "镇守天水·鲁芝"
+        ]
+      },
+      "current": false
+    },
+    {
+      "id": "palace-07",
+      "label": "2026 春节",
+      "dates": "2026-02-15 ~ 03-22",
+      "grand_prizes": {
+        "hero": [
+          "张既",
+          "谋黄月英",
+          "谋诸葛瑾"
+        ],
+        "skin": [
+          "肋骨牢笼·杨修",
+          "剑舞如风·孙尚香",
+          "稳镇风云·皇甫嵩"
+        ]
+      },
+      "featured": "张既",
+      "current": false
+    },
+    {
+      "id": "palace-08",
+      "label": "2026 奇遇集",
+      "dates": "2026-03-07 ~ 04-12",
+      "grand_prizes": {
+        "hero": [
+          "骥·乐进",
+          "玄·毌丘俭",
+          "谋·贾诩"
+        ],
+        "skin": [
+          "凶戾盈天·徐荣",
+          "半醉山河·神郭嘉",
+          "陈筹画策·贾诩"
+        ]
+      },
+      "featured": "骥·乐进",
+      "current": false
+    },
+    {
+      "id": "palace-08b",
+      "label": "2026 踏青",
+      "dates": "2026-04-04 ~ 05-08",
+      "grand_prizes": {
+        "hero": [
+          "朱绩",
+          "谋·张辽",
+          "势·黄祖"
+        ],
+        "skin": [
+          "舍生忘死·王双",
+          "心御万念·孙寒华",
+          "金石之策·吕范"
+        ]
+      },
+      "featured": "谋·张辽",
+      "current": false
+    },
+    {
+      "id": "palace-08c",
+      "label": "2026 夏日狂欢",
+      "dates": "2026-06-06 ~ 07-12",
+      "grand_prizes": {
+        "hero": [
+          "势·孙峻",
+          "友·徐庶",
+          "界蔡夫人"
+        ],
+        "skin": [
+          "狴犴伏阶·杨弘",
+          "龙生九子·钟会",
+          "灼灼其华·胡金定"
+        ]
+      },
+      "featured": "势·孙峻",
+      "current": false
+    },
+    {
+      "id": "palace-09",
+      "label": "2026 暑期",
+      "dates": "2026-08-01 ~ 08-14",
+      "grand_prizes": {
+        "hero": [
+          "崔琰毛玠",
+          "张既",
+          "谋·法正"
+        ],
+        "skin": [
+          "拼死力抗·严颜",
+          "半醉山河·神郭嘉",
+          "舍生忘死·王双"
+        ]
+      },
+      "featured": "崔琰毛玠",
+      "current": false
+    },
+    {
+      "id": "palace-10",
+      "label": "2026 七夕返场",
+      "dates": "2026-08-15 ~ 08-28",
+      "featured": "吴珂",
+      "grand_prizes": {
+        "hero": [
+          "吴珂",
+          "杨奉",
+          "势·娄圭"
+        ],
+        "skin": [
+          "谲云渊心·程昱",
+          "护帝东归·杨奉",
+          "稳镇风云·皇甫嵩"
+        ]
+      },
+      "current": false
+    },
+    {
+      "id": "palace-11a",
+      "label": "2026 锦囊妙会",
+      "dates": "2026-10-01 ~ 10-14",
+      "featured": "势·陈群",
+      "grand_prizes": {
+        "hero": [
+          "势·陈群",
+          "朱绩",
+          "势·庞羲"
+        ],
+        "skin": [
+          "心乱如麻·刘璋",
+          "狴犴伏阶·杨弘",
+          "人强胜天·留赞"
+        ]
+      },
+      "current": false
+    },
+    {
+      "id": "palace-11b",
+      "label": "2026 秋日返场",
+      "dates": "2026-10-01 ~ 10-30",
+      "featured": "谋贾诩",
+      "grand_prizes": {
+        "hero": [
+          "谋贾诩",
+          "陈珪",
+          "势黄祖"
+        ],
+        "skin": [
+          "剑舞如风·孙尚香",
+          "蔽主弄权·张让",
+          "撞阵冲军·李严"
+        ]
+      },
+      "current": false
+    },
+    {
+      "id": "palace-12",
+      "label": "2026 霜降返场",
+      "dates": "2026-10-17 ~ 11-15",
+      "featured": "谋·张辽",
+      "grand_prizes": {
+        "hero": [
+          "谋·张辽",
+          "界朱桓",
+          "来敏"
+        ],
+        "skin": [
+          "流沔洛川·曹植",
+          "力敌千钧·沙摩柯",
+          "兵发吴地·杜预"
+        ]
+      },
+      "current": true
+    }
+  ],
+  "grid_source": "官网《天工宝库概率公示》https://www.sanguosha.cn/news/detail2/2128.html（2025-01-10，权重合计 10000，普通 85.00% / 精品 14.70% / 稀有 0.30%）",
+  "rules_url": "https://www.sanguosha.cn/news/detail2/2128.html"
+}

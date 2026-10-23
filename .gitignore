@@ -1,0 +1,42 @@
+# ---- 依赖与构建产物 ----
+node_modules/
+dist/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# ---- 运行时数据（SQLite 数据库由程序首次启动时自动创建）----
+data/*.db
+data/*.db-shm
+data/*.db-wal
+*.log
+
+# ---- 本地配置 ----
+.env
+.env.local
+.DS_Store
+Thumbs.db
+
+# ---- 数据文件的手工备份（本地保留，不入库）----
+*.bak-*
+
+# ---- 测试与调试临时目录 ----
+backend/_testdata/
+.workbuddy/
+
+# ---- 图片素材不随仓库分发（合计约 1.3GB），由抓取脚本自行下载 ----
+# 获取方式见 README「素材资源」一节
+image/武将图片/
+image/皮肤图片/
+image/官网素材/武将/
+image/官网素材/皮肤/
+image/官网素材/皮肤带名/
+image/官网素材/低清弃用/
+image/官网素材/天工宝库概率图/
+image/官网素材/礼盒概率图/
+image/index.html
+image/总览.png
+image/素材清单.csv
+image/皮肤归属表.csv

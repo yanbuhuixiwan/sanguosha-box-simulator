@@ -1,0 +1,1208 @@
+/* ============================================================
+   三国杀 · 盒子模拟器 —— 视觉系统 v2「焦墨宣纸」
+   焦墨 #1A1714 │ 旧宣纸 #2D2720 │ 朱砂 #9E2B25 │ 赭石金 #A67C4E
+   只换皮肤，不动布局：色值、字体、肌理、印章、动效四层
+   ============================================================ */
+
+/* ---------- 字体：得意黑（模块标题）/ 思源黑体（正文·按钮·数字）----------
+   行书标题优先用本机已授权的「禹卫粗行书」，没有则退到系统行楷，
+   最后落到 Noto Serif——保证任何机器上都不会出现方框或掉字。 */
+@font-face {
+  font-family: 'Smiley Sans';
+  src: url('/fonts/SmileySans-Oblique.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url('/fonts/NotoSansSC-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url('/fonts/NotoSansSC-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- 焦墨 ---------- */
+  --ink-950: #0e0c0a;
+  --ink-900: #1a1714; /* 焦墨底 */
+  --ink-850: #211d19;
+  --ink-800: #26211c;
+  --ink-700: #2d2720; /* 旧宣纸卡片 */
+  --ink-600: #3a322a;
+  --ink-500: #4a4137;
+
+  /* ---------- 宣纸 ---------- */
+  --paper: #ece2ca;
+  --paper-2: #dccdae;
+  --paper-dim: #bfaf92;
+  --paper-mute: #8c7f6a;
+
+  /* ---------- 朱砂 ---------- */
+  --crimson: #9e2b25;
+  --crimson-2: #b8463b;
+  --crimson-deep: #711b17;
+
+  /* ---------- 赭石金 ---------- */
+  --gold: #a67c4e;
+  --gold-2: #c9a46e;
+  --gold-deep: #7c5a34;
+
+  /* ---------- 备用色：全部收敛到墨/朱/赭，不留蓝紫 ---------- */
+  --jade: #6e7a62;
+  --azure: #877a67;
+  --violet: #8a7263;
+
+  /* ---------- 圆角：宣纸/竹简都是硬边，最大 4px ---------- */
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 4px;
+
+  --shadow-panel: 0 10px 26px -20px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 238, 210, 0.04) inset;
+  --shadow-gold: 0 0 0 1px rgba(166, 124, 78, 0.34), 0 8px 20px -16px rgba(0, 0, 0, 0.9);
+
+  /* ---------- 字体族 ---------- */
+  --font-brush: '禹卫粗行书', '禹卫书法行书', 'YuWei CuXingShu', 'STXingkai', '华文行楷',
+    'KaiTi', '楷体', 'Noto Serif SC', serif;
+  --font-display: 'Smiley Sans', '得意黑', 'SmileySans-Oblique', 'Noto Sans SC', 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  --font-sans: 'Noto Sans SC', '思源黑体', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei',
+    system-ui, sans-serif;
+  --font-num: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  /* 旧变量名保留：老组件里的 var(--font-serif) 一律走行书标题字 */
+  --font-serif: var(--font-brush);
+
+  /* ---------- 肌理：宣纸纤维 / 细墨点 / 枯笔飞白 ---------- */
+  --tex-fiber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23f)'/%3E%3C/svg%3E");
+  --tex-inkdot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.045' numOctaves='2'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.04 0 0 0 0 0.035 0 0 0 0 0.03 0 0 0 -14 5.4'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23d)'/%3E%3C/svg%3E");
+  /* 枯笔飞白：横向断续干笔触，用于 hover 与边框叠层 */
+  --tex-drybrush: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='16'%3E%3Cg fill='%23f0e2c4'%3E%3Crect x='0' y='6' width='92' height='2.2' opacity='.5'/%3E%3Crect x='96' y='5.4' width='24' height='3' opacity='.7'/%3E%3Crect x='124' y='6.6' width='58' height='2' opacity='.42'/%3E%3Crect x='186' y='5.8' width='16' height='3' opacity='.62'/%3E%3Crect x='206' y='6.4' width='34' height='2.2' opacity='.36'/%3E%3C/g%3E%3C/svg%3E");
+  /* 浅底（旧羊皮）专用的墨色飞白，白色干笔在浅纸上会看不见 */
+  --tex-drybrush-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='16'%3E%3Cg fill='%233a3025'%3E%3Crect x='0' y='6' width='92' height='2.2' opacity='.5'/%3E%3Crect x='96' y='5.4' width='24' height='3' opacity='.7'/%3E%3Crect x='124' y='6.6' width='58' height='2' opacity='.42'/%3E%3Crect x='186' y='5.8' width='16' height='3' opacity='.62'/%3E%3Crect x='206' y='6.4' width='34' height='2.2' opacity='.36'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* ---------- 战场景观（只做「场」，不画主体） ---------- */
+  /* 竖版枯笔残边：从左缘向内逐渐变淡的干墨丝。
+     用 feTurbulence + feDisplacementMap 把矩形边打碎成毛边，否则会像进度条 */
+  --tex-edge-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='1200' viewBox='0 0 120 1200' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='e' x='-30%25' y='-4%25' width='160%25' height='108%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09 0.016' numOctaves='3' seed='7' result='t'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='t' scale='12' xChannelSelector='R' yChannelSelector='G'/%3E%3CfeGaussianBlur stdDeviation='0.8'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='%23e6d6b6' filter='url(%23e)'%3E%3Crect x='4' y='-10' width='3.4' height='172' opacity='.24'/%3E%3Crect x='3.6' y='184' width='2.4' height='108' opacity='.15'/%3E%3Crect x='3.4' y='330' width='6.2' height='108' opacity='.22'/%3E%3Crect x='5' y='468' width='3.8' height='242' opacity='.38'/%3E%3Crect x='3.8' y='748' width='6.4' height='88' opacity='.24'/%3E%3Crect x='4.6' y='868' width='4.2' height='342' opacity='.3'/%3E%3Crect x='20' y='58' width='2.8' height='192' opacity='.2'/%3E%3Crect x='19.2' y='288' width='3.8' height='78' opacity='.15'/%3E%3Crect x='21' y='398' width='2.4' height='272' opacity='.18'/%3E%3Crect x='19.6' y='708' width='3.4' height='162' opacity='.12'/%3E%3Crect x='38' y='138' width='2' height='102' opacity='.13'/%3E%3Crect x='37' y='428' width='2.8' height='342' opacity='.1'/%3E%3Crect x='39' y='818' width='2' height='132' opacity='.09'/%3E%3Crect x='60' y='248' width='2.4' height='72' opacity='.08'/%3E%3Crect x='59' y='578' width='2' height='212' opacity='.07'/%3E%3Crect x='86' y='38' width='1.8' height='152' opacity='.05'/%3E%3Crect x='85' y='358' width='2.4' height='242' opacity='.045'/%3E%3Crect x='106' y='178' width='1.5' height='122' opacity='.035'/%3E%3C/g%3E%3C/svg%3E");
+  /* 极远山影：两道圆缓山脊（不起尖峰），轻微高斯模糊，整体压在 4%–5% */
+  --tex-ridge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='300' viewBox='0 0 1400 300' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='b' x='-5%25' y='-40%25' width='110%25' height='180%25'%3E%3CfeGaussianBlur stdDeviation='3'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23b)' fill='%23e6d6b6'%3E%3Cpath opacity='.095' d='M0 192 C60 189 96 158 170 162 C232 166 268 136 338 141 C406 146 436 174 508 171 C574 168 606 132 688 135 C766 138 798 178 876 175 C944 172 978 146 1048 151 C1116 156 1154 184 1226 181 C1286 178 1342 196 1400 191 L1400 300 L0 300 Z'/%3E%3Cpath opacity='.062' d='M0 240 C92 236 142 218 232 221 C322 224 362 208 452 211 C542 214 592 234 682 231 C772 228 822 208 912 212 C1002 216 1052 236 1142 233 C1232 230 1292 244 1400 239 L1400 300 L0 300 Z'/%3E%3C/g%3E%3C/svg%3E");
+  /* 残旗轮廓：两根歪斜断杆 + 一面撕裂的旗（不闭合，让缺口像被烧掉半截） */
+  --tex-flag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260' viewBox='0 0 420 260'%3E%3Cg fill='none' stroke='%23e6d6b6' stroke-linecap='round' stroke-width='3.6' opacity='.13'%3E%3Cpath d='M60 260 L68 34'/%3E%3Cpath d='M66 56 C104 46 124 62 154 54 C146 86 140 112 146 140 C118 132 90 144 68 136'/%3E%3Cpath d='M330 260 L342 96'/%3E%3Cpath d='M340 110 C366 104 378 114 392 110'/%3E%3C/g%3E%3C/svg%3E");
+  /* 零星飞墨喷点：只做颗粒，不成团 */
+  --tex-spray: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='%23e6d6b6'%3E%3Ccircle cx='191.0' cy='67.9' r='1.8' opacity='0.076'/%3E%3Ccircle cx='105.1' cy='137.8' r='0.9' opacity='0.169'/%3E%3Ccircle cx='93.1' cy='47.0' r='3.0' opacity='0.183'/%3E%3Ccircle cx='31.0' cy='37.3' r='3.0' opacity='0.107'/%3E%3Ccircle cx='87.7' cy='62.7' r='3.0' opacity='0.067'/%3E%3Ccircle cx='169.4' cy='15.6' r='3.6' opacity='0.176'/%3E%3Ccircle cx='89.1' cy='42.2' r='1.1' opacity='0.075'/%3E%3Ccircle cx='193.7' cy='191.4' r='0.9' opacity='0.141'/%3E%3Ccircle cx='154.5' cy='8.8' r='1.8' opacity='0.12'/%3E%3Ccircle cx='102.3' cy='94.6' r='1.8' opacity='0.059'/%3E%3Ccircle cx='77.4' cy='30.6' r='1.1' opacity='0.11'/%3E%3Ccircle cx='141.8' cy='128.1' r='1.4' opacity='0.174'/%3E%3Ccircle cx='110.4' cy='20.4' r='0.9' opacity='0.09'/%3E%3Ccircle cx='45.6' cy='87.4' r='3.0' opacity='0.122'/%3E%3Ccircle cx='93.2' cy='72.9' r='3.6' opacity='0.096'/%3E%3Ccircle cx='120.5' cy='34.4' r='2.4' opacity='0.094'/%3E%3Ccircle cx='103.7' cy='113.7' r='1.8' opacity='0.097'/%3E%3Ccircle cx='12.5' cy='61.5' r='1.8' opacity='0.111'/%3E%3Ccircle cx='181.9' cy='161.8' r='1.1' opacity='0.055'/%3E%3Ccircle cx='192.5' cy='102.7' r='1.4' opacity='0.147'/%3E%3Ccircle cx='139.9' cy='19.5' r='3.6' opacity='0.057'/%3E%3Ccircle cx='31.1' cy='71.8' r='1.4' opacity='0.175'/%3E%3Ccircle cx='131.2' cy='147.6' r='3.6' opacity='0.111'/%3E%3Ccircle cx='178.5' cy='126.9' r='1.8' opacity='0.056'/%3E%3Ccircle cx='102.9' cy='136.0' r='3.0' opacity='0.154'/%3E%3Ccircle cx='175.6' cy='61.7' r='3.6' opacity='0.136'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* ---------- 粗犷笔触（空区用，压得住场） ---------- */
+  /* 竖版大笔：几块宽窄不一的浓墨压边，displacement 把直边撕成毛口，
+     再用浅色细丝压在墨上做「枯笔露白」 */
+  --tex-brush-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='900' viewBox='0 0 100 900' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='bv' x='-45%25' y='-6%25' width='190%25' height='112%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.03 0.01' numOctaves='4' seed='11' result='t'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='t' scale='13' xChannelSelector='R' yChannelSelector='G'/%3E%3CfeGaussianBlur stdDeviation='1'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23bv)'%3E%3Cg fill='%23050403'%3E%3Crect x='-6' y='-14' width='15' height='250' opacity='0.446'/%3E%3Crect x='-6' y='196' width='23' height='74' opacity='0.288'/%3E%3Crect x='-6' y='290' width='11' height='188' opacity='0.403'/%3E%3Crect x='-6' y='452' width='27' height='62' opacity='0.245'/%3E%3Crect x='-6' y='524' width='14' height='204' opacity='0.418'/%3E%3Crect x='-6' y='700' width='8' height='216' opacity='0.331'/%3E%3C/g%3E%3Cg fill='%23d9c6a4'%3E%3Crect x='3' y='12' width='2.2' height='152' opacity='0.108'/%3E%3Crect x='7' y='120' width='1.6' height='92' opacity='0.079'/%3E%3Crect x='2' y='322' width='2.4' height='122' opacity='0.094'/%3E%3Crect x='6' y='560' width='1.8' height='142' opacity='0.086'/%3E%3Crect x='1.6' y='742' width='2' height='102' opacity='0.072'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  /* 泼墨团：焦墨底上「深色墨块」只会变成阴影，真正读得出来的是**浅色干笔飞白**。
+     做法：画一条完整粗笔（两端收锋），再用噪声切出笔毛缝 —— 注意是「一条带子上的细缝」，
+     不是「几根独立的平行线」，后者一定像扫帚 */
+  /* 泼墨团：焦墨底上「深色墨块」只会变成阴影，真正读得出来的是**浅色干笔飞白**。
+     做法：15 根粗细/间距/长度都不等的笔毛叠成一条笔身 —— 粗的互相压住成实墨，
+     细的留缝成飞白，末端长短不一自然收锋。displacement 只做轻微毛边，不能大，
+     一大就把笔毛搅成一片灰雾 */
+  --tex-splash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640' viewBox='0 0 640 640'%3E%3Cdefs%3E%3Cfilter id='sp' x='-10%25' y='-16%25' width='120%25' height='132%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='2' seed='7' result='t'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='t' scale='13' xChannelSelector='R' yChannelSelector='G'/%3E%3CfeGaussianBlur stdDeviation='0.65'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23sp)' stroke='%23cbb894' fill='none' stroke-linecap='butt'%3E%3Cpath d='M5.9 452.4 C135.7 436.1 273.2 448.1 387.8 442.1' stroke-width='6' opacity='0.077'/%3E%3Cpath d='M25.7 462.8 C121.5 446.1 223.0 458.1 307.5 452.1' stroke-width='6' opacity='0.06'/%3E%3Cpath d='M13.0 469.5 C151.4 462.9 298.0 474.9 420.1 468.9' stroke-width='6' opacity='0.083'/%3E%3Cpath d='M3.6 479.9 C130.1 462.7 264.1 474.7 375.7 468.7' stroke-width='6' opacity='0.084'/%3E%3Cpath d='M9.5 492.3 C106.4 484.4 209.0 496.4 294.5 490.4' stroke-width='6' opacity='0.066'/%3E%3Cpath d='M4.7 503.4 C130.0 495.3 262.6 507.3 373.1 501.3' stroke-width='9' opacity='0.057'/%3E%3Cpath d='M3.5 509.9 C106.3 505.9 215.2 517.9 305.9 511.9' stroke-width='27' opacity='0.064'/%3E%3Cpath d='M26.0 519.4 C130.9 514.0 241.9 526.0 334.5 520.0' stroke-width='9' opacity='0.076'/%3E%3Cpath d='M16.9 527.2 C135.1 514.4 260.3 526.4 364.6 520.4' stroke-width='12' opacity='0.073'/%3E%3Cpath d='M5.1 540.6 C120.6 539.4 243.0 551.4 344.9 545.4' stroke-width='34' opacity='0.055'/%3E%3Cpath d='M27.0 549.7 C113.8 547.5 205.7 559.5 282.3 553.5' stroke-width='21' opacity='0.066'/%3E%3Cpath d='M20.1 558.1 C141.6 541.3 270.2 553.3 377.4 547.3' stroke-width='21' opacity='0.076'/%3E%3Cpath d='M9.0 564.8 C140.7 559.4 280.1 571.4 396.3 565.4' stroke-width='6' opacity='0.043'/%3E%3Cpath d='M27.8 575.6 C160.9 573.6 301.8 585.6 419.2 579.6' stroke-width='12' opacity='0.072'/%3E%3Cpath d='M26.5 584.2 C130.8 567.3 241.3 579.3 333.4 573.3' stroke-width='21' opacity='0.045'/%3E%3Cpath d='M5.4 596.0 C110.2 586.9 221.1 598.9 313.6 592.9' stroke-width='16' opacity='0.081'/%3E%3Cpath d='M12.4 603.2 C116.7 600.8 227.1 612.8 319.1 606.8' stroke-width='9' opacity='0.077'/%3E%3Cpath d='M331.0 500.3 C363.0 493.3 397.0 487.3' stroke-width='4' opacity='0.042'/%3E%3Cpath d='M313.7 512.1 C345.7 505.1 379.7 499.1' stroke-width='3' opacity='0.029'/%3E%3Cpath d='M313.9 494.9 C345.9 487.9 379.9 481.9' stroke-width='4' opacity='0.046'/%3E%3Cpath d='M318.5 489.2 C350.5 482.2 384.5 476.2' stroke-width='3' opacity='0.035'/%3E%3Cpath d='M345.2 510.8 C377.2 503.8 411.2 497.8' stroke-width='3' opacity='0.042'/%3E%3C/g%3E%3C/svg%3E");
+  /* 横版大笔：一笔扫过去的断续白，用于页签栏右侧那片空白 */
+  --tex-brush-h: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='26' viewBox='0 0 600 26' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='bh' x='-4%25' y='-110%25' width='108%25' height='320%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.009 0.08' numOctaves='3' seed='9' result='t'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='t' scale='8' xChannelSelector='R' yChannelSelector='G'/%3E%3CfeGaussianBlur stdDeviation='0.7'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23bh)' fill='%23d9c6a4'%3E%3Crect x='0' y='10' width='238' height='3.6' opacity='.42'/%3E%3Crect x='248' y='8.6' width='152' height='5' opacity='.3'/%3E%3Crect x='408' y='10.4' width='118' height='2.8' opacity='.34'/%3E%3Crect x='536' y='9.4' width='62' height='3.8' opacity='.22'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; }
+
+/* ============================================================
+   滚动条：墨色细条（天宫期数栏等横向滚动区共用）
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.36);
+}
+::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  background-color: rgba(166, 124, 78, 0.5);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(201, 164, 110, 0.72);
+}
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Firefox 不认 ::-webkit-scrollbar，必须用特性检测隔离，
+   否则 Chromium 会弃用上面那套伪元素、画回带箭头的系统滚动条 */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(166, 124, 78, 0.42) rgba(0, 0, 0, 0.3);
+  }
+}
+
+html, body, #app { height: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--ink-900);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 焦墨底：只留极淡的战雾与两处赭朱晕，不铺放射暗纹 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% -12%, rgba(158, 43, 37, 0.05), transparent 58%),
+    radial-gradient(80% 60% at 96% 104%, rgba(166, 124, 78, 0.045), transparent 62%),
+    var(--ink-900);
+}
+
+/* 宣纸颗粒：5%（用户红线 ≤8%），再叠一层淡战雾墨点 */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: var(--tex-fiber);
+  background-size: 180px 180px;
+}
+
+#app { position: relative; z-index: 1; }
+
+::selection { background: rgba(158, 43, 37, 0.55); color: #fff8ea; }
+
+/* ------------------------------ 排版 ------------------------------ */
+h1, h2 {
+  font-family: var(--font-brush);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.page-title {
+  font-size: clamp(1.5rem, 3.4vw, 2.05rem);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-brush);
+}
+.page-title .seal {
+  font-size: 0.68rem;
+  font-family: var(--font-brush);
+  color: #f6e7cc;
+  border: 0;
+  padding: 3px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.12em;
+  background: linear-gradient(160deg, #a8322b, #8a211c);
+  transform: rotate(-2.5deg);
+  box-shadow: inset 0 0 0 1px rgba(246, 231, 204, 0.4);
+}
+
+.subtle { color: var(--paper-mute); font-size: 0.86rem; }
+.gold { color: var(--gold-2); }
+.crimson { color: var(--crimson-2); }
+
+/* ============================================================
+   工具类：宣纸卡 / 枯笔边 / 朱砂印 / 墨痕下划线 / 竹简标签
+   ============================================================ */
+
+/* 旧宣纸底：纤维 7% + 深墨底 */
+.ink-paper {
+  position: relative;
+  background-color: var(--ink-700);
+  background-image: linear-gradient(180deg, rgba(45, 39, 32, 0.94), rgba(26, 23, 20, 0.97));
+  border: 1px solid rgba(166, 124, 78, 0.2);
+  border-radius: 2px;
+}
+.ink-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: var(--tex-fiber);
+  background-size: 180px 180px;
+}
+
+/* 枯笔弱边框：双线 ＋ 顶部一丝干笔，替代原来的金色描边 */
+.ink-edge {
+  position: relative;
+  border: 1px solid rgba(166, 124, 78, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 14, 0.55);
+}
+.ink-edge::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: -1px;
+  height: 2px;
+  background-image: var(--tex-drybrush);
+  background-repeat: repeat-x;
+  background-size: 240px 16px;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+/* 篆刻小红印 */
+.seal-stamp {
+  --seal: 26px;
+  width: var(--seal);
+  height: var(--seal);
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  font-family: var(--font-brush);
+  font-size: calc(var(--seal) * 0.48);
+  line-height: 1;
+  color: #f7e9d0;
+  background: linear-gradient(158deg, #a8322b, #86201b);
+  border-radius: 2px;
+  transform: rotate(-3deg);
+  box-shadow: inset 0 0 0 1px rgba(247, 233, 208, 0.38), inset 0 0 6px rgba(0, 0, 0, 0.35);
+  user-select: none;
+}
+.seal-stamp--sm { --seal: 20px; }
+.seal-stamp--xs { --seal: 16px; }
+.seal-stamp--lg { --seal: 34px; }
+.seal-stamp--round { border-radius: 50%; }
+
+/* 朱砂墨痕下划线（替代亮黄底选中态） */
+.brush-underline {
+  position: relative;
+}
+.brush-underline::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -3px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--crimson) 10%, var(--crimson) 72%, rgba(158, 43, 37, 0.25) 92%, transparent);
+  pointer-events: none;
+}
+
+/* 竹简式小标签 */
+.bamboo-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 2px;
+  border: 1px solid rgba(166, 124, 78, 0.24);
+  background: linear-gradient(180deg, rgba(58, 50, 42, 0.72), rgba(33, 29, 25, 0.86));
+  color: var(--paper-dim);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.bamboo-tab:hover { color: var(--paper); border-color: rgba(166, 124, 78, 0.5); }
+
+/* 小竹简选钮（购买数量 / 档位筛选）：选中＝赭石金底＋深墨字 */
+.chip {
+  padding: 0.3rem 0.7rem;
+  border-radius: 2px;
+  border: 1px solid rgba(166, 124, 78, 0.24);
+  background: linear-gradient(180deg, rgba(58, 50, 42, 0.72), rgba(33, 29, 25, 0.86));
+  color: var(--paper-dim);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.chip:hover { color: var(--paper); border-color: rgba(166, 124, 78, 0.52); }
+.chip--active {
+  color: #241a0e;
+  font-weight: 700;
+  border-color: rgba(240, 224, 194, 0.4);
+  background: linear-gradient(180deg, #c69a66, #a67c4e 62%, #8a6438);
+  box-shadow: inset 0 1px 0 rgba(255, 244, 220, 0.22);
+}
+
+/* ------------------------------ 容器 ------------------------------ */
+.shell {
+  width: min(1180px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+.app-main {
+  padding-bottom: 5rem;
+  min-height: calc(100vh - 74px);
+}
+
+/* ------------------------------ 顶部栏 ------------------------------ */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: linear-gradient(180deg, rgba(26, 23, 20, 0.98), rgba(22, 19, 16, 0.94));
+  border-bottom: 1px solid rgba(166, 124, 78, 0.2);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+}
+.app-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background-image: var(--tex-drybrush);
+  background-repeat: repeat-x;
+  background-size: 240px 16px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.app-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: 74px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-brush);
+  font-size: 1.16rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.brand__mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+  background: linear-gradient(150deg, var(--crimson), var(--crimson-deep));
+  color: #f7e9d0;
+  font-family: var(--font-brush);
+  font-size: 1.2rem;
+  box-shadow: inset 0 0 0 1px rgba(247, 233, 208, 0.42);
+  transform: rotate(-2deg);
+}
+
+.brand__sub {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--paper-mute);
+  display: block;
+  margin-top: 2px;
+}
+
+.nav {
+  display: flex;
+  gap: 0.3rem;
+  margin-left: 0.5rem;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+
+.nav__item {
+  position: relative;
+  padding: 0.5rem 0.9rem;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  color: var(--paper-dim);
+  border: 1px solid transparent;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+.nav__item:hover { color: var(--paper); background: rgba(166, 124, 78, 0.08); }
+.nav__item.router-link-active {
+  color: var(--paper);
+  border-color: transparent;
+  background: transparent;
+}
+/* 选中态只留一道朱砂墨痕，不要亮底 */
+.nav__item.router-link-active::after {
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 3px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--crimson-2) 12%, var(--crimson) 70%, transparent);
+}
+
+.wallet {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.78rem;
+  border-radius: 2px;
+  border: 1px solid rgba(166, 124, 78, 0.26);
+  background: linear-gradient(180deg, rgba(58, 50, 42, 0.5), rgba(33, 29, 25, 0.72));
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92rem;
+  color: var(--gold-2);
+  white-space: nowrap;
+}
+.wallet__icon { font-size: 0.82rem; opacity: 0.8; }
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  font-family: var(--font-num);
+  color: var(--paper-dim);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.counter b { color: var(--paper); font-weight: 700; }
+
+/* ------------------------------ 按钮 ------------------------------ */
+/* 竹简按钮（默认）：暗墨底 + 细墨边，hover 时干笔横扫 */
+.btn {
+  --btn-bg: linear-gradient(180deg, rgba(58, 50, 42, 0.8), rgba(33, 29, 25, 0.92));
+  --btn-fg: var(--paper-dim);
+  --btn-bd: rgba(166, 124, 78, 0.28);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.66rem 1.4rem;
+  border-radius: 2px;
+  border: 1px solid var(--btn-bd);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-sans);
+  font-size: 0.94rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.18s, border-color 0.18s, background 0.18s, box-shadow 0.18s;
+}
+/* 干笔横扫：200ms 淡扫，不是霓虹光 */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--tex-drybrush);
+  background-repeat: repeat-x;
+  background-size: 240px 16px;
+  opacity: 0;
+  transform: translateX(-60%);
+  pointer-events: none;
+}
+.btn:hover:not(:disabled) {
+  color: var(--paper);
+  border-color: rgba(166, 124, 78, 0.62);
+}
+.btn:hover:not(:disabled)::after {
+  animation: brushSweep 0.34s ease-out both;
+}
+.btn:active:not(:disabled) {
+  box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.16);
+}
+.btn:disabled { opacity: 0.36; cursor: not-allowed; }
+
+@keyframes brushSweep {
+  0% { opacity: 0; transform: translateX(-70%); }
+  35% { opacity: 0.34; }
+  100% { opacity: 0; transform: translateX(110%); }
+}
+
+/* 朱砂战旗按钮 */
+.btn-primary {
+  --btn-bg: linear-gradient(178deg, #a8322b 0%, #9e2b25 52%, #7d1d19 100%);
+  --btn-bd: rgba(247, 233, 208, 0.3);
+  --btn-fg: #fdf2dd;
+  box-shadow: inset 0 1px 0 rgba(255, 236, 210, 0.16);
+}
+.btn-primary:hover:not(:disabled) {
+  --btn-bg: linear-gradient(178deg, #b23a31 0%, #a32e27 52%, #85211c 100%);
+  border-color: rgba(247, 233, 208, 0.46);
+}
+
+/* 赭石金按钮 */
+.btn-gold {
+  --btn-bg: linear-gradient(178deg, #b98f5d, #a67c4e 58%, #8a6438);
+  --btn-bd: rgba(240, 224, 194, 0.34);
+  --btn-fg: #241a0e;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255, 244, 220, 0.22);
+}
+.btn-gold:hover:not(:disabled) {
+  --btn-bg: linear-gradient(178deg, #c69a66, #b28757 58%, #946c3e);
+}
+
+.btn-ghost {
+  --btn-bd: rgba(166, 124, 78, 0.22);
+  --btn-fg: var(--paper-dim);
+  --btn-bg: rgba(255, 246, 228, 0.02);
+}
+.btn-ghost:hover:not(:disabled) {
+  --btn-fg: var(--paper);
+  --btn-bg: rgba(166, 124, 78, 0.1);
+}
+
+.btn-sm { padding: 0.4rem 0.82rem; font-size: 0.82rem; letter-spacing: 0.06em; }
+.btn-block { width: 100%; }
+
+/* ------------------------------ 面板 ------------------------------ */
+.panel {
+  position: relative;
+  background-color: var(--ink-700);
+  background-image: linear-gradient(170deg, rgba(45, 39, 32, 0.92), rgba(24, 21, 18, 0.96));
+  border: 1px solid rgba(166, 124, 78, 0.2);
+  border-radius: 3px;
+  box-shadow: var(--shadow-panel);
+}
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: var(--tex-fiber);
+  background-size: 180px 180px;
+}
+.panel--pad { padding: 1.4rem 1.5rem; }
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.panel__head h3 {
+  font-family: var(--font-display);
+  font-size: 1.04rem;
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.panel__head h3::before {
+  content: '';
+  width: 3px;
+  height: 15px;
+  border-radius: 0;
+  background: var(--crimson);
+}
+
+/* ------------------------------ 稀有度：朱砂 / 赭石体系，无蓝紫 ------------------------------ */
+.r-common    { --rc: #8c7f6a; --rc-soft: rgba(140, 127, 106, 0.14); }
+.r-good      { --rc: #9a8a70; --rc-soft: rgba(154, 138, 112, 0.14); }
+.r-fine      { --rc: #7e8a6a; --rc-soft: rgba(126, 138, 106, 0.15); }
+.r-rare      { --rc: #a67c4e; --rc-soft: rgba(166, 124, 78, 0.16); }
+.r-epic      { --rc: #b8463b; --rc-soft: rgba(158, 43, 37, 0.17); }
+.r-legendary { --rc: #c9a46e; --rc-soft: rgba(201, 164, 110, 0.18); }
+
+/* 稀有度标签＝小篆刻戳 */
+.rarity-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 1px;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: color-mix(in srgb, var(--rc, #8c7f6a) 62%, #f6ead4);
+  border: 1px solid color-mix(in srgb, var(--rc, #8c7f6a) 52%, transparent);
+  background: color-mix(in srgb, var(--rc, #8c7f6a) 16%, transparent);
+  font-family: var(--font-display);
+  transform: rotate(-1.5deg);
+}
+
+/* ------------------------------ 物品卡 ------------------------------ */
+.item-card {
+  position: relative;
+  border-radius: 2px;
+  border: 1px solid color-mix(in srgb, var(--rc, #8c7f6a) 34%, rgba(20, 17, 14, 0.6));
+  background-color: var(--ink-700);
+  background-image: linear-gradient(180deg, rgba(45, 39, 32, 0.9), rgba(22, 19, 16, 0.96));
+  padding: 0.8rem 0.55rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.42rem;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.item-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: var(--tex-fiber);
+  background-size: 160px 160px;
+}
+.item-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--rc, #8c7f6a) 58%, transparent);
+}
+
+.item-card__icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-brush);
+  font-size: 1.1rem;
+  color: color-mix(in srgb, var(--rc, #8c7f6a) 60%, #f0e3c8);
+  background: color-mix(in srgb, var(--rc, #8c7f6a) 14%, rgba(20, 17, 14, 0.5));
+  border: 1px solid color-mix(in srgb, var(--rc, #8c7f6a) 40%, transparent);
+}
+
+/* 有真实素材图时：去掉圆形容器，只保留一层极淡暗角 */
+.item-card__icon--img {
+  padding: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.28);
+}
+.item-card__icon--img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.item-card__name {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--paper);
+  word-break: break-all;
+}
+.item-card__qty {
+  font-family: var(--font-num);
+  color: var(--gold-2);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+.item-card__prob {
+  font-size: 0.7rem;
+  color: var(--paper-mute);
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------ 概率条 ------------------------------ */
+.prob-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(166, 124, 78, 0.12);
+  align-items: center;
+}
+.prob-row:last-child { border-bottom: none; }
+.prob-row__main { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+.prob-row__name {
+  font-size: 0.86rem;
+  color: var(--paper-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.prob-row__value {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  color: var(--paper);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.prob-track {
+  grid-column: 1 / -1;
+  height: 3px;
+  border-radius: 0;
+  background: rgba(236, 226, 202, 0.07);
+  overflow: hidden;
+}
+.prob-fill {
+  height: 100%;
+  border-radius: 0;
+  background: linear-gradient(90deg, rgba(166, 124, 78, 0.45), var(--gold));
+  transform-origin: left;
+  animation: growX 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+@keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ------------------------------ 网格 ------------------------------ */
+.grid { display: grid; gap: 0.85rem; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.grid-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+@media (max-width: 900px) {
+  .grid-4, .grid-5, .grid-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .shell { width: min(1180px, 100% - 1.6rem); }
+  .grid-4, .grid-5, .grid-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-2 { grid-template-columns: 1fr; }
+  .app-header__inner { height: auto; padding: 0.6rem 0; flex-wrap: wrap; gap: 0.45rem; }
+  .nav { order: 3; width: 100%; margin-left: 0; flex-wrap: wrap; overflow: visible; gap: 0.2rem; }
+  .nav__item { padding: 0.36rem 0.52rem; font-size: 0.8rem; }
+  .brand__sub { display: none; }
+  .brand { font-size: 1rem; gap: 0.5rem; }
+  .brand__mark { width: 28px; height: 28px; font-size: 0.95rem; }
+  .wallet { padding: 0.34rem 0.58rem; font-size: 0.84rem; }
+  .app-header .btn-sm { padding: 0.36rem 0.52rem; font-size: 0.78rem; letter-spacing: 0.02em; }
+}
+
+/* ------------------------------ 开盒动画 ------------------------------ */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sealIn {
+  0% { opacity: 0; transform: scale(1.5) rotate(-14deg); }
+  60% { opacity: 1; transform: scale(0.94) rotate(-3deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-4deg); }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(0.8deg); }
+}
+
+.reveal-item { animation: riseIn 0.45s cubic-bezier(0.16, 0.9, 0.3, 1) both; }
+
+/* 传说卡：不再脉冲发光，改成一圈极淡赭石描边 + 小印 */
+.reveal-item.r-legendary .item-card {
+  border-color: rgba(201, 164, 110, 0.66);
+  box-shadow: inset 0 0 0 1px rgba(201, 164, 110, 0.2);
+}
+.reveal-item.r-legendary::after {
+  content: '橙';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-family: var(--font-brush);
+  font-size: 0.6rem;
+  color: #f7e9d0;
+  background: linear-gradient(160deg, #a8322b, #86201b);
+  border-radius: 1px;
+  padding: 1px 4px;
+  z-index: 2;
+  transform: rotate(-3deg);
+}
+
+/* 抽卡结果卡：纵向卡片，去掉高光扫过 */
+.pull-card {
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--rc, #8c7f6a) 40%, rgba(20, 17, 14, 0.6));
+  background-color: var(--ink-700);
+  background-image: linear-gradient(180deg, rgba(45, 39, 32, 0.92), rgba(21, 18, 15, 0.96));
+  padding: 1rem 0.55rem 0.8rem;
+  text-align: center;
+  min-height: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.pull-card.is-new::after {
+  content: '新';
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  font-family: var(--font-brush);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 1px 4px;
+  border-radius: 1px;
+  color: #f7e9d0;
+  background: linear-gradient(160deg, #a8322b, #86201b);
+  font-weight: 400;
+  transform: rotate(-3deg);
+}
+.pull-card__glyph {
+  font-family: var(--font-brush);
+  font-size: 1.5rem;
+  color: color-mix(in srgb, var(--rc, #8c7f6a) 55%, #efe2c6);
+}
+.pull-card__name {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--paper);
+  line-height: 1.3;
+  word-break: break-all;
+}
+.pull-card__meta {
+  font-size: 0.68rem;
+  color: color-mix(in srgb, var(--rc, #8c7f6a) 60%, var(--paper-mute));
+  letter-spacing: 0.04em;
+}
+
+/* ------------------------------ 弹层 ------------------------------ */
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(12, 10, 8, 0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  animation: fadeIn 0.2s ease both;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: relative;
+  width: min(960px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  border-radius: 3px;
+  border: 1px solid rgba(166, 124, 78, 0.3);
+  background-color: var(--ink-850);
+  background-image: linear-gradient(175deg, #241f1a, #15120f 72%);
+  box-shadow: 0 30px 70px -30px #000;
+  padding: 1.5rem 1.6rem 1.7rem;
+  animation: modalIn 0.3s cubic-bezier(0.16, 0.9, 0.28, 1) both;
+}
+.modal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: var(--tex-fiber);
+  background-size: 180px 180px;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+.modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.modal__title { font-family: var(--font-brush); font-size: 1.3rem; }
+.modal__close {
+  background: none;
+  border: 1px solid rgba(166, 124, 78, 0.24);
+  color: var(--paper-dim);
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 0.95rem;
+  transition: 0.18s;
+}
+.modal__close:hover { color: var(--paper); border-color: var(--gold); }
+
+.modal__foot {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------ 提示条 ------------------------------ */
+.toast-stack {
+  position: fixed;
+  top: 88px;
+  right: 1.2rem;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  pointer-events: none;
+}
+.toast {
+  min-width: 190px;
+  max-width: 320px;
+  padding: 0.68rem 0.92rem;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(166, 124, 78, 0.3);
+  border-left: 2px solid var(--gold);
+  background: rgba(33, 29, 25, 0.97);
+  color: var(--paper);
+  box-shadow: 0 12px 26px -18px #000;
+  animation: toastIn 0.26s ease both;
+}
+.toast--error { border-color: rgba(158, 43, 37, 0.6); border-left-color: var(--crimson-2); color: #f6d9d4; }
+.toast--success { border-color: rgba(126, 138, 106, 0.55); border-left-color: #7e8a6a; color: #e4ebd8; }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ------------------------------ 表单 ------------------------------ */
+.field { display: flex; flex-direction: column; gap: 0.42rem; }
+.field label { font-size: 0.76rem; letter-spacing: 0.1em; color: var(--paper-mute); }
+
+.input {
+  width: 100%;
+  padding: 0.7rem 0.88rem;
+  border-radius: 2px;
+  border: 1px solid rgba(166, 124, 78, 0.24);
+  background: rgba(18, 15, 13, 0.72);
+  color: var(--paper);
+  font-size: 0.94rem;
+  font-family: var(--font-num);
+  transition: 0.18s;
+}
+.input:focus {
+  outline: none;
+  border-color: rgba(166, 124, 78, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(166, 124, 78, 0.2);
+}
+.input::placeholder { color: #6d6254; }
+
+/* ------------------------------ 装饰元素 ------------------------------ */
+.v-text {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.42em;
+  font-family: var(--font-brush);
+  color: rgba(166, 124, 78, 0.2);
+  user-select: none;
+}
+
+.hr-fade {
+  height: 1px;
+  border: 0;
+  background-image: var(--tex-drybrush);
+  background-repeat: repeat-x;
+  background-size: 240px 16px;
+  opacity: 0.28;
+  margin: 1.2rem 0;
+}
+
+.stat-tile {
+  position: relative;
+  padding: 0.85rem 1rem;
+  border-radius: 2px;
+  border: 1px solid rgba(166, 124, 78, 0.16);
+  background: linear-gradient(180deg, rgba(48, 41, 34, 0.5), rgba(30, 26, 22, 0.5));
+  overflow: hidden;
+}
+/* 微残边：下沿一抹断开的干笔，不当边框用 */
+.stat-tile::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 8%;
+  bottom: 0;
+  height: 1px;
+  background-image: var(--tex-drybrush);
+  background-repeat: repeat-x;
+  background-size: 240px 16px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.stat-tile__label { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--paper-mute); }
+.stat-tile__value {
+  font-family: var(--font-num);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--gold-2);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.28rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 2.6rem 1rem;
+  color: var(--paper-mute);
+  font-size: 0.88rem;
+}
+/* 空状态：一小片旧羊皮，顶边留一道飞白，墨字压在上面 */
+.panel.empty {
+  position: relative;
+  overflow: hidden;
+  color: #4a3f30;
+  border: 1px solid rgba(112, 96, 72, 0.45);
+  border-radius: 2px;
+  background-color: #d6c6a1;
+  background-image:
+    radial-gradient(130% 140% at 50% 0%, rgba(255, 250, 236, 0.34), transparent 60%),
+    linear-gradient(178deg, #ded0ae, #cbb994);
+}
+.panel.empty::before { opacity: 0.1; }
+.panel.empty::after {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 0;
+  height: 3px;
+  background-image: var(--tex-drybrush-ink);
+  background-repeat: repeat-x;
+  background-size: 240px 16px;
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(236, 226, 202, 0.22);
+  border-top-color: var(--paper);
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   泼墨转场（大厅「开始抽取」→ 抽盒页）
+   保留转场节奏，但只铺焦墨，不再做整屏炸墨
+   ============================================================ */
+.ink-burst {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ink-burst__blob {
+  position: absolute;
+  left: var(--ox, 50%);
+  top: var(--oy, 50%);
+  width: 62vmax;
+  height: 62vmax;
+  margin: -31vmax 0 0 -31vmax;
+  background: radial-gradient(
+    closest-side circle at 46% 42%,
+    #1a1714 0%,
+    #15120f 58%,
+    rgba(20, 17, 14, 0.94) 84%,
+    rgba(18, 15, 13, 0) 100%
+  );
+  transform: scale(0);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.ink-burst__blob--a { --rot: 14deg; border-radius: 47% 53% 61% 39% / 55% 43% 57% 45%; animation-delay: 0s; }
+.ink-burst__blob--b {
+  --rot: -38deg;
+  width: 46vmax; height: 52vmax; margin: -23vmax 0 0 -23vmax;
+  border-radius: 61% 39% 43% 57% / 47% 58% 42% 53%;
+  animation-delay: 0.04s;
+}
+.ink-burst__blob--c {
+  --rot: 72deg;
+  width: 38vmax; height: 44vmax; margin: -19vmax 0 0 -19vmax;
+  border-radius: 39% 61% 57% 43% / 62% 38% 62% 38%;
+  animation-delay: 0.08s;
+}
+.ink-burst__blob--d {
+  --rot: -116deg;
+  width: 32vmax; height: 36vmax; margin: -16vmax 0 0 -16vmax;
+  border-radius: 55% 45% 38% 62% / 41% 59% 41% 59%;
+  animation-delay: 0.12s;
+}
+.ink-burst__blob--e {
+  --rot: 152deg;
+  width: 26vmax; height: 30vmax; margin: -13vmax 0 0 -13vmax;
+  border-radius: 43% 57% 62% 38% / 58% 42% 58% 42%;
+  animation-delay: 0.16s;
+}
+
+.ink-burst__haze {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(circle at var(--ox, 50%) var(--oy, 50%), #171410 0%, #13110e 58%, #0e0c0a 100%);
+}
+
+.ink-burst::before,
+.ink-burst::after {
+  content: '';
+  position: absolute;
+  left: var(--ox, 50%);
+  top: var(--oy, 50%);
+  width: 9vmax;
+  height: 10vmax;
+  margin: -5vmax 0 0 13vmax;
+  border-radius: 55% 45% 48% 52% / 46% 54% 46% 54%;
+  background: radial-gradient(closest-side, #171410 0%, rgba(19, 16, 13, 0.92) 70%, transparent 100%);
+  opacity: 0;
+}
+.ink-burst::after {
+  width: 6vmax;
+  height: 7vmax;
+  margin: -3vmax 0 0 -24vmax;
+  border-radius: 47% 53% 58% 42% / 53% 47% 53% 47%;
+}
+.ink-burst--in::before,
+.ink-burst--in::after {
+  animation: inkSplatDot 0.42s cubic-bezier(0.16, 0.9, 0.3, 1) 0.1s both;
+}
+.ink-burst--out::before,
+.ink-burst--out::after { opacity: 1; }
+
+.ink-burst--in .ink-burst__blob { animation: inkSplat 0.44s cubic-bezier(0.16, 0.9, 0.3, 1) both; }
+.ink-burst--in .ink-burst__haze { animation: inkHaze 0.42s ease-out 0.1s both; }
+.ink-burst--out .ink-burst__blob { transform: scale(1.12) rotate(var(--rot, 0deg)); opacity: 1; }
+.ink-burst--out .ink-burst__haze { opacity: 1; }
+.ink-burst--out { animation: inkFadeOut 0.5s cubic-bezier(0.5, 0, 0.75, 0) both; }
+
+@keyframes inkSplat {
+  0% { transform: scale(0.02) rotate(var(--rot, 0deg)); opacity: 0; }
+  35% { opacity: 1; }
+  100% { transform: scale(1) rotate(var(--rot, 0deg)); opacity: 1; }
+}
+@keyframes inkSplatDot {
+  0% { transform: scale(0.1); opacity: 0; }
+  55% { opacity: 1; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+@keyframes inkHaze { from { opacity: 0; } to { opacity: 1; } }
+@keyframes inkFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-burst { display: none; }
+  .btn:hover:not(:disabled)::after { animation: none; }
+}

@@ -1,0 +1,44 @@
+[
+ {
+  "hero": "胡金定",
+  "skin": "明良千古",
+  "file": "明良千古-胡金定-静态.jpg",
+  "quality": "传说",
+  "painter": "白"
+ },
+ {
+  "hero": "胡金定",
+  "skin": "万物惊秋",
+  "file": "万物惊秋-胡金定-静态.jpg",
+  "quality": "史诗",
+  "painter": "墨心绘意"
+ },
+ {
+  "hero": "胡金定",
+  "skin": "小家碧玉",
+  "file": "小家碧玉-胡金定-静态.jpg",
+  "quality": "史诗",
+  "painter": "石琨"
+ },
+ {
+  "hero": "胡金定",
+  "skin": "情寄桃夭",
+  "file": "情寄桃夭-胡金定-静态.jpg",
+  "quality": "稀有",
+  "painter": "佚名"
+ },
+ {
+  "hero": "严颜",
+  "skin": "义士相钦",
+  "file": "义士相钦-严颜-静态.jpg",
+  "quality": "稀有",
+  "painter": "君桓文化"
+ },
+ {
+  "hero": "严颜",
+  "skin": "宝刀未老",
+  "file": "宝刀未老-严颜-静态.jpg",
+  "quality": "精良",
+  "painter": "心中一凛"
+ }
+]

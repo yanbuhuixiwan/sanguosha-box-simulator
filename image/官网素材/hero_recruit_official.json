@@ -1,0 +1,1087 @@
+[
+ {
+  "name": "典韦",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "荀彧",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "庞统",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "卧龙诸葛",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "太史慈",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "庞德",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "颜良文丑",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "袁绍",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "徐晃",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "曹丕",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "孙坚",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "董卓",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "孙策",
+  "grade": 1,
+  "weight": 153
+ },
+ {
+  "name": "祝融",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "孟获",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "贾诩",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "张郃",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "邓艾",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "姜维",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "刘禅",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "张昭张纮",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "界公孙瓒",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "SP孙尚香",
+  "grade": 2,
+  "weight": 100
+ },
+ {
+  "name": "SP马超",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "SP贾诩",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "曹洪",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "祖茂",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "何太后",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "李丰",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "曹植",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "高顺",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "陈宫",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "法正",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "凌统",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "马谡",
+  "grade": 3,
+  "weight": 102
+ },
+ {
+  "name": "吴国太",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "徐盛",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "于禁",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "界法正",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "徐庶",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "曹彰",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "王异",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "荀攸",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "步练师",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "刘表",
+  "grade": 4,
+  "weight": 175
+ },
+ {
+  "name": "马岱",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "甘夫人",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "丁奉",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "马腾",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "纪灵",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "田丰",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "潘凤",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "邹氏",
+  "grade": 5,
+  "weight": 210
+ },
+ {
+  "name": "夏侯霸",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "曹昂",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "诸葛瑾",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "朱灵",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "孙鲁育",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "界马岱",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "钟会",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "界王异",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "界关张",
+  "grade": 6,
+  "weight": 327
+ },
+ {
+  "name": "伏完",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "曹冲",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "郭淮",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "关平",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "刘封",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "潘璋马忠",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "虞翻",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "伏皇后",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "李儒",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "界徐庶",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "界李典",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "公孙瓒",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "司马朗",
+  "grade": 7,
+  "weight": 468
+ },
+ {
+  "name": "袁术",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界曹操",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界甘宁",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界黄盖",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界周瑜",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界大乔",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界陆逊",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界司马懿",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界夏侯惇",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界张辽",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界华佗",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "界刘备",
+  "grade": 8,
+  "weight": 724
+ },
+ {
+  "name": "SP关羽",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "马良",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "程普",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "韩当",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "乐进",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "文聘",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "SP姜维",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "关兴张苞",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "廖化",
+  "grade": 9,
+  "weight": 613
+ },
+ {
+  "name": "诸葛诞",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "曹真",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "韩浩史涣",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "陈群",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "吴懿",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "周仓",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "张松",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "孙鲁班",
+  "grade": 10,
+  "weight": 919
+ },
+ {
+  "name": "朱桓",
+  "grade": 11,
+  "weight": 416
+ },
+ {
+  "name": "顾雍",
+  "grade": 11,
+  "weight": 416
+ },
+ {
+  "name": "蔡夫人",
+  "grade": 11,
+  "weight": 416
+ },
+ {
+  "name": "公孙渊",
+  "grade": 11,
+  "weight": 416
+ },
+ {
+  "name": "张宝",
+  "grade": 11,
+  "weight": 416
+ },
+ {
+  "name": "满宠",
+  "grade": 11,
+  "weight": 416
+ },
+ {
+  "name": "简雍",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "朱然",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "刘协",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "SP蔡文姬",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "大乔小乔",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "蒋琬费祎",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "夏侯氏",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "孙休",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "臧霸",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "糜夫人",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "朱治",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "陈武董袭",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "郭图逢纪",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "全琮",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "张嶷",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "曹叡",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "刘谌",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "SP黄月英",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "蹋顿",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "张鲁",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "糜竺",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "严白虎",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "郭皇后",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "黄皓",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "吕岱",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "刘繇",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "樊稠",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "卫温&诸葛直",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "李傕郭汜",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "卞夫人",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "辛宪英",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "李严",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "刘虞",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "马忠",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "孙登",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界张飞",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界赵云",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界许褚",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界郭嘉",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界关羽",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界吕蒙",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界庞统",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界吕布",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界庞德",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "界伊籍",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "杜畿",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "潘濬",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "邓芝",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "吕范",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "吕虔",
+  "grade": 12,
+  "weight": 79
+ },
+ {
+  "name": "糜芳傅士仁",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "孟达",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "董昭",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "唐咨",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "傅肜",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "张恭",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "吕凯",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "杨仪",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "董承",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界潘璋马忠",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "胡车儿",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界顾雍",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界夏侯渊",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界诸葛亮",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "蒋钦",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "张任",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "曹节",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "蒋钦",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界颜良文丑",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界黄月英",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "严颜",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "SP太史慈",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "孙亮",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "卢植",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "张济",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界貂蝉",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "许贡",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "张翼",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "丁原",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "刘琦",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "曹休",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "董白",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "赵统赵广",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界孙权",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "李通",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "星张郃",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界满宠",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界郭淮",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "华歆",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "界周仓",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "孙资刘放",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "沮授",
+  "grade": 16,
+  "weight": 23
+ },
+ {
+  "name": "关银屏",
+  "grade": 14,
+  "weight": 34
+ },
+ {
+  "name": "杨修",
+  "grade": 18,
+  "weight": 4
+ },
+ {
+  "name": "左慈",
+  "grade": 17,
+  "weight": 46
+ },
+ {
+  "name": "陈琳",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "戏志才",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "孙皓",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "士燮",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "董允",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "王平",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "刘晔",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "张让",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "麹义",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "关索",
+  "grade": 19,
+  "weight": 4
+ },
+ {
+  "name": "赵襄",
+  "grade": 20,
+  "weight": 9
+ },
+ {
+  "name": "张星彩",
+  "grade": 20,
+  "weight": 9
+ }
+]

@@ -1,0 +1,47 @@
+name: sanguosha-box
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: sgs-box-api
+    restart: unless-stopped
+    environment:
+      DATA_DIR: /app/data
+      IMAGE_DIR: /app/image
+      SECRET_KEY: ${SECRET_KEY:-sanguosha-box-simulator-dev-secret-change-me}
+      INITIAL_YUANBAO: ${INITIAL_YUANBAO:-8888}
+      MAX_BULK_OPEN: ${MAX_BULK_OPEN:-50}
+      TOKEN_EXPIRE_HOURS: ${TOKEN_EXPIRE_HOURS:-168}
+    volumes:
+      - ./data:/app/data
+      - ./image:/app/image:ro
+    ports:
+      - "${API_PORT:-8000}:8000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2).status==200 else 1)",
+        ]
+      interval: 15s
+      timeout: 4s
+      retries: 5
+      start_period: 12s
+
+  web:
+    build:
+      context: ./frontend
+    container_name: sgs-box-web
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-8080}:80"
+
+networks:
+  default:
+    name: sgs-box-net
