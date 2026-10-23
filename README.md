@@ -143,6 +143,17 @@
 - Python 3.10 及以上（后端已按 3.13 验证）
 - Node.js 18 及以上（仅构建前端时需要）
 - Windows 用户可使用随仓库提供的批处理启动器，无需 Docker
+- 首次部署需联网执行一次素材抓取（约 1.3 GB，见第七节「素材获取说明」）
+
+### 获取代码
+
+```bash
+git clone https://github.com/yanbuhuixiwan/sanguosha-box-simulator.git
+cd sanguosha-box-simulator
+```
+
+> 图片素材不随仓库分发。若需完整界面效果，请先按第七节「素材获取说明」执行抓取；
+> 不抓取素材也可正常启动并完成全部抽取逻辑，界面以字形占位替代图片。
 
 ### 方式一：本地脚本启动（Windows，推荐）
 
